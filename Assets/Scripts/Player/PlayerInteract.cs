@@ -10,13 +10,17 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float distance = 3f;
     [SerializeField] private LayerMask mask;
     private PlayerUI _playerUI;
-    private PlayerInput _inputManager;
+    private PlayerInput _playerInput;
+
+    private void Awake()
+    {
+        _playerInput = new PlayerInput();
+    }
 
     private void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
         _playerUI = GetComponent<PlayerUI>();
-        _inputManager = GetComponent<PlayerInput>();
     }
 
     private void Update()
@@ -29,10 +33,12 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hitInfo.collider.GetComponent<Interactable>() != null)
             {
+                Debug.Log("Tepkiver");
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 _playerUI.UpdateText(interactable.promptMessage);
-                if (_inputManager.OnFoot.Interact.triggered)
+                if (_playerInput.OnFoot.Interact.triggered)
                 {
+                    Debug.Log("Interacted");
                     interactable.BaseInteract();
                 }
             }

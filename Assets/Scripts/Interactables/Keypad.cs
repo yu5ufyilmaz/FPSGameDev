@@ -10,8 +10,10 @@ public class Keypad : Interactable
     private bool _doorOpen;
     
     
+    // ReSharper disable Unity.PerformanceAnalysis
     protected override void Interact()
     {
+        Debug.Log("Door Open");
         _doorOpen = !_doorOpen;
         _doors.GetComponent<Animator>().SetBool("IsOpen",_doorOpen);
     }
