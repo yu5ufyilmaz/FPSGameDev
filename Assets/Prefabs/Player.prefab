@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 4768086760914032719}
   - component: {fileID: 7025341100616770730}
   - component: {fileID: 3955267402203642387}
+  - component: {fileID: 9148859992331714192}
   - component: {fileID: 4193107091750652881}
-  - component: {fileID: 2308789431641756685}
+  - component: {fileID: 1813666720706594680}
+  - component: {fileID: 6940104045490985928}
   - component: {fileID: 5129429022955096142}
   m_Layer: 7
   m_Name: Player
@@ -100,6 +102,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e39c61cdd394e9489869ac71454b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9148859992331714192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107654598221244543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baffa620b41eb9446840eb98e434a8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _promptText: {fileID: 0}
 --- !u!114 &4193107091750652881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +131,7 @@ MonoBehaviour:
   speed: 5
   jumpHeight: 1.2
   gravity: -9.8
---- !u!114 &2308789431641756685
+--- !u!114 &1813666720706594680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,6 +144,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 4359625869523068446}
+--- !u!114 &6940104045490985928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107654598221244543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1bdb7e895c0f9f4eb8b44de4776f8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 3
+  mask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!143 &5129429022955096142
 CharacterController:
   m_ObjectHideFlags: 0
