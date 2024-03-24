@@ -6,8 +6,6 @@ using UnityEngine.Serialization;
 
 public class Weapon : MonoBehaviour
 {
-    public Camera playerCamera;
-
 
     public bool isShooting, readyToShoot;
     private bool allowReset = true;
@@ -22,6 +20,9 @@ public class Weapon : MonoBehaviour
     public Transform bulletSpawn;
     public float bulletVelocity = 30f;
     public float bulletPrefabLifeTime = 3f;
+
+    public GameObject muzzleEffect;
+    private Animator _animator;
     
     public enum ShootingMode 
     {
@@ -31,19 +32,15 @@ public class Weapon : MonoBehaviour
     }
 
     public ShootingMode currentShootingMode;
+    private static readonly int Recoil = Animator.StringToHash("Recoil");
 
     private void Awake()
     {
         readyToShoot = true;
         burstBulletsLeft = bulletsPerBurst;
+        _animator = GetComponent<Animator>();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -67,6 +64,9 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+        _animator.SetTrigger(Recoil);
+        SoundManager.instance.shootingSoundPistol.Play();
         readyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
 
     public Vector3 CalculateDirectionAndSpread()
     {
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         Vector3 targetPoint;
