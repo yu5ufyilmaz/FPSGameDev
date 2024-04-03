@@ -27,6 +27,14 @@ public class Weapon : MonoBehaviour
     public float reloadTime;
     public int magazineSize, bulletsLeft;
     public bool isReloading;
+
+    public enum WeaponModel
+    {
+        Pistol,
+        MP5
+    }
+
+    public WeaponModel currentWeaponModel;
     
     public enum ShootingMode
     {
@@ -37,6 +45,7 @@ public class Weapon : MonoBehaviour
 
     public ShootingMode currentShootingMode;
     private static readonly int Recoil = Animator.StringToHash("Recoil");
+    private static readonly int Reload1 = Animator.StringToHash("Reload");
 
     private void Awake()
     {
@@ -90,7 +99,7 @@ public class Weapon : MonoBehaviour
 
         muzzleEffect.GetComponent<ParticleSystem>().Play();
         _animator.SetTrigger(Recoil);
-        SoundManager.instance.shootingSoundPistol.Play();
+        SoundManager.instance.PlayShootingSound(currentWeaponModel);
         readyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
@@ -116,9 +125,12 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
+        SoundManager.instance.PlayReloadSound(currentWeaponModel);
+        _animator.SetTrigger(Reload1);
+        
         isReloading = true;
         Invoke(nameof(ReloadCompleted), reloadTime);
-        SoundManager.instance.reloadingSoundPistol.Play();
+        
     }
 
     private void ReloadCompleted()
