@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static Weapon;
 
 public class SoundManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayShootingSound(Weapon.WeaponModel weapon)
+    public void PlayShootingSound(WeaponModel weapon)
     {
         switch (weapon)
         {
@@ -40,7 +41,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayReloadSound(Weapon.WeaponModel weapon)
+    public void PlayReloadSound(WeaponModel weapon)
     {
         switch (weapon)
         {
