@@ -12,6 +12,8 @@ public class Enemies : MonoBehaviour
     
     private NavMeshAgent navAgent;
 
+    public bool isDead;
+
    private void Start()
    {
       animator = GetComponent<Animator>();
@@ -34,11 +36,18 @@ public class Enemies : MonoBehaviour
          {
             animator.SetTrigger("Die2");
          }
+         
+         isDead = true;
+         SoundManager.instance.alienChannel2.PlayOneShot(SoundManager.instance.alienDeath);
       }
       else
       {
          animator.SetTrigger("Damage");
+         SoundManager.instance.alienChannel2.PlayOneShot(SoundManager.instance.alienHurt);
       }
+
+      
+
    }
 
    private void OnDrawGizmos()

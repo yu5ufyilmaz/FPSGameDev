@@ -19,6 +19,16 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource throwablesChannel;
     public AudioClip grenadeSound;
+
+
+    public AudioClip alienWalking;
+    public AudioClip alienChase;
+    public AudioClip alienAttack;
+    public AudioClip alienHurt;
+    public AudioClip alienDeath;
+
+    public AudioSource alienChannel;
+    public AudioSource alienChannel2;
     private void Awake()
     {
         if (instance != null && instance != this)

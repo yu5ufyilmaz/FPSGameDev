@@ -25,9 +25,24 @@ public class Bullet : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Alien"))
         {
-            collision.gameObject.GetComponent<Enemies>().TakeDamage(bulletDamage);
+            if (collision.gameObject.GetComponent<Enemies>().isDead == false)
+            {
+                collision.gameObject.GetComponent<Enemies>().TakeDamage(bulletDamage);
+            }
+            
+            CreateBloodSprayEffect(collision);
+            
             Destroy(gameObject);
         }
+    }
+
+    private void CreateBloodSprayEffect(Collision collision)
+    {
+        ContactPoint contactPoint = collision.contacts[0];
+
+        GameObject bloodSprayPrefab = Instantiate(GlobalReferences.instance.bloodSprayEffect,contactPoint.point,Quaternion.LookRotation(contactPoint.normal));
+        
+        bloodSprayPrefab.transform.SetParent(collision.gameObject.transform);
     }
 
     void CreateBulletImpactEffect(Collision collision)
