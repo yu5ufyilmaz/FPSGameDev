@@ -72,6 +72,11 @@ public class Throwable : MonoBehaviour
             {
                 rb.AddExplosionForce(explosionForce,transform.position,damageRadius);
             }
+
+            if (objectInRange.gameObject.GetComponent<Enemies>())
+            {
+                objectInRange.gameObject.GetComponent<Enemies>().TakeDamage(100);
+            }
         }
     }
 }
