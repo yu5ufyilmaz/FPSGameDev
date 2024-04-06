@@ -6,16 +6,19 @@ TagManager:
   tags:
   - Enemy
   - Wall
+  - Weapon
+  - FxTemporaire
+  - Alien
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - Ground
-  - Player
-  - Interactable
+  - 
+  - 
+  - 
   - 
   - 
   - 
