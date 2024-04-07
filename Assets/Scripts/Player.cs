@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,17 @@ public class Player : MonoBehaviour
 {
    public int HP = 100;
    public GameObject bloodyScreen;
-   
+
+   public TextMeshProUGUI playerHealthUI;
+   public GameObject gameOverUI;
+
+   public bool isDead;
+
+   private void Start()
+   {
+     // playerHealthUI.text = $"Health: {HP}";
+   }
+
    public void TakeDamage(int damageAmount)
    {
       HP -= damageAmount;
@@ -16,12 +27,42 @@ public class Player : MonoBehaviour
       if (HP <= 0)
       {
          Debug.Log("Dead");
+         PlayerDead();
+         isDead = true;
       }
       else
       {
          Debug.Log("Hit");
          StartCoroutine(BloodyScreenEffect());
+         playerHealthUI.text = $"Health: {HP}";
+         SoundManager.instance.playerChannel.PlayOneShot(SoundManager.instance.playerHurt);
       }
+   }
+
+   private void PlayerDead()
+   {
+      SoundManager.instance.playerChannel.PlayOneShot(SoundManager.instance.playerDeath);
+      
+      SoundManager.instance.playerChannel.clip = SoundManager.instance.gameOverMusic;
+      SoundManager.instance.playerChannel.PlayDelayed(2f);
+
+
+      
+      GetComponent<PlayerMovement>().enabled = false;
+      GetComponent<MouseMovement>().enabled = false;
+
+      GetComponentInChildren<Animator>().enabled = true;
+      playerHealthUI.gameObject.SetActive(false);
+      
+      GetComponent<ScreenFader>().StartFade();
+
+      StartCoroutine(ShowGameOverUI());
+   }
+
+   private IEnumerator ShowGameOverUI()
+   {
+      yield return new WaitForSeconds(1f);
+      gameOverUI.gameObject.SetActive(true);
    }
 
    private IEnumerator BloodyScreenEffect()
@@ -63,7 +104,10 @@ public class Player : MonoBehaviour
    {
       if (other.CompareTag("AlienHand"))
       {
-         TakeDamage(other.gameObject.GetComponent<AlienHand>().damage);
+         if (isDead == false)
+         {
+            TakeDamage(other.gameObject.GetComponent<AlienHand>().damage);
+         }
       }
    }
 }

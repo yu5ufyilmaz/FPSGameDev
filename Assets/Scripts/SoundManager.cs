@@ -29,6 +29,12 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource alienChannel;
     public AudioSource alienChannel2;
+    
+    public AudioSource playerChannel;
+    public AudioClip playerHurt;
+    public AudioClip playerDeath;
+
+    public AudioClip gameOverMusic;
     private void Awake()
     {
         if (instance != null && instance != this)
