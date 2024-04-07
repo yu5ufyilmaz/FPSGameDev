@@ -12,6 +12,8 @@ public class GlobalReferences : MonoBehaviour
  public GameObject grenadeExplosionEffect;
 
  public GameObject bloodSprayEffect;
+
+ public int waveNumber;
  
 
  private void Awake()

@@ -30,6 +30,7 @@ public class AlienSpawnController : MonoBehaviour
     private void Start()
     {
         currentAliensPerWave = initialAliensPerWave;
+        GlobalReferences.instance.waveNumber = currentWave;
 
         StartNextWave();
     }
@@ -37,8 +38,9 @@ public class AlienSpawnController : MonoBehaviour
     private void StartNextWave()
     {
         currentAliensAlive.Clear();
-
         currentWave++;
+
+        GlobalReferences.instance.waveNumber = currentWave;
         currentWaveUI.text = "Wave: " + currentWave.ToString();
         StartCoroutine(SpawnWave());
     }
@@ -92,7 +94,7 @@ public class AlienSpawnController : MonoBehaviour
             coolDownCounter = waveCooldown;
         }
 
-        coolDownCounterUI.text = coolDownCounter.ToString();
+        coolDownCounterUI.text = coolDownCounter.ToString("F0");
     }
 
     private IEnumerator WaveCooldown()
